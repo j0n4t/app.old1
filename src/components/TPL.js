@@ -1,11 +1,17 @@
 import React from 'react'
 import { view } from 'react-easy-state'
+import HourCreator from './HourCreator'
+import Hour from './Hour'
+import appStore from '../store/appStore'
 
-import appStore from '../store'
-
-// TODO: make a Hour component
-export default view(() => (
-  <ul>
-    {appStore.TPL.hours.map(hour => <li key={hour.id}> {hour.weekday} </li>)}
-  </ul>
-))
+export default view(() => {
+  return (
+    <div className='container'>
+      <h1>Hours</h1>
+      <HourCreator />
+      {appStore.hours.map(hour => (
+        <Hour hour={hour} key={hour.id} />
+      ))}
+    </div>
+  )
+})
