@@ -6,7 +6,7 @@ section {
   margin: 0 auto;
 }
 
-button, input, select {
+button, input, select:not([multiple]) {
   height: 1.7em;
   width: fit-content;
   margin: 1px;
@@ -28,4 +28,8 @@ button, input, select {
 .center {
   align-items: center;
   text-align: center;
+}
+
+.block-child > * {
+  display: block;
 }

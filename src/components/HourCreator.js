@@ -20,7 +20,7 @@ class HourCreator extends Component {
     const { newHour } = this.compStore
 
     return (
-      <div>
+      <div className='flex center'>
         <select
           name='weekday'
           value={newHour.weekday}
