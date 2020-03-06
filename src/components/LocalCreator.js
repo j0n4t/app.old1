@@ -27,7 +27,7 @@ class LocalCreator extends Component {
   }
 
   render() {
-    const { addLocal, onChange } = this
+    const { addLocal, onChange, onHoursChange } = this
     const { newLocal } = this.compStore
 
     return (
@@ -41,9 +41,7 @@ class LocalCreator extends Component {
        <select
           name='hours'
           value={newLocal.hours}
-          onChange={this.onHoursChange}
-          placeholder='hours'
-          className='u-full-width'
+          onChange={onHoursChange}
           multiple
           >
           {appStore.hours.map(hour => (

@@ -1,0 +1,8 @@
+- assigns calendar view
+- import/ export JSON
+- persist data on browser storage
+- pretty print page view
+- filter profiles rules
+- assigns view by profile
+- stats (assigned ratio, etc)
+- nice style!
