@@ -28,7 +28,7 @@ class HourCreator extends Component {
           placeholder='weekday'
           className='u-full-width'
           >
-          {appStore.weekdays.map(day => (
+          {appStore.data.weekdays.map(day => (
             <option key={day} value={day}>{day}</option>
           ))}
         </select>

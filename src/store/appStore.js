@@ -1,94 +1,109 @@
 import { store } from 'react-easy-state'
 
 const appStore = store({
-  weekdays: ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'],
-
+  restoreStore() {
+    appStore.data = JSON.parse(localStorage.getItem('data'))
+  },
+  saveStore() {
+    localStorage.setItem('data', JSON.stringify(appStore.data))
+  },
+  
+  data: {
+    weekdays: ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'],
+    countHours: 1,
+    hours: [
+      {id: 0, weekday: 'SEG', start: '12:00', end: '14:00' }
+    ],
+    countLocals: 1,
+    locals: [
+      {id: 0, name:'Padaria', hours: [0] }
+    ],
+    countProfiles: 1,
+    profiles: [
+      {id: 0, name:'Jonathan', sex:'M', hours: [0] }
+    ],
+    countAssigns: 1,
+    assigns: [
+      {id: 0, date:'2020-02-21', local: 0, hour: 0, profiles: [] }
+    ],
+  },
+  
   // HOURS
-  countHours: 1,
-  hours: [
-    {id: 0, weekday: 'SEG', start: '12:00', end: '14:00' }
-  ],
   getHourDesc(id) {
-    const hour = appStore.hours.find(h => h.id == id)
+    const hour = appStore.data.hours.find(h => h.id == id)
     return hour.weekday + ': ' + hour.start + ' - ' + hour.end
   },
   addHour(hour) {
-    hour.id = appStore.countHours++
+    hour.id = appStore.data.countHours++
     hour.weekday = hour.weekday || 0
     hour.start = hour.start || '00:00'
     hour.end = hour.end || '02:00'
-    appStore.hours.push(hour)
+    appStore.data.hours.push(hour)
   },
   deleteHour(hour) {
     // TODO: delete all references in store before deleting!
-    const idx = appStore.hours.indexOf(hour)
-    appStore.hours.splice(idx, 1)
+    const idx = appStore.data.hours.indexOf(hour)
+    appStore.data.hours.splice(idx, 1)
   },
 
   // LOCALS
-  countLocals: 1,
-  locals: [
-    {id: 0, name:'Padaria', hours: [0] }
-  ],
   getLocalHours(id) {
-    const local = appStore.locals.find(l => l.id == id)
+    const local = appStore.data.locals.find(l => l.id == id)
     return local.hours
   },
   getLocalName(id) {
-    const local = appStore.locals.find(l => l.id == id)
+    const local = appStore.data.locals.find(l => l.id == id)
     return local.name
   },
   addLocal(local) {
-    local.id = appStore.countLocals++
+    local.id = appStore.data.countLocals++
     local.name = local.name || 'New local'
     local.hours = local.hours || []
-    appStore.locals.push(local)
+    appStore.data.locals.push(local)
   },
   deleteLocal(local) {
     // TODO: delete all references in appStore before deleting!
-    const idx = appStore.locals.indexOf(local)
-    appStore.locals.splice(idx, 1)
+    const idx = appStore.data.locals.indexOf(local)
+    appStore.data.locals.splice(idx, 1)
   },
 
   // PROFILES
-  countProfiles: 1,
-  profiles: [
-    {id: 0, name:'Jonathan', sex:'M', hours: [0] }
-  ],
   getProfileName(id) {
-    const profile = appStore.profiles.find(p => p.id == id)
+    const profile = appStore.data.profiles.find(p => p.id == id)
     return profile.name
   },
   addProfile(profile) {
-    profile.id = appStore.countProfiles++
+    profile.id = appStore.data.countProfiles++
     profile.name = profile.name || 'New profile'
     profile.sex = profile.sex || 'M'
     profile.hours = profile.hours || []
-    appStore.profiles.push(profile)
+    appStore.data.profiles.push(profile)
   },
   deleteProfile(profile) {
     // TODO: delete all references in appStore before deleting!
-    const idx = appStore.profiles.indexOf(profile)
-    appStore.profiles.splice(idx, 1)
+    const idx = appStore.data.profiles.indexOf(profile)
+    appStore.data.profiles.splice(idx, 1)
   },
 
   // ASSIGNS
-  countAssigns: 1,
-  assigns: [
-    {id: 0, date:'2020-02-21', local: 0, hour: 0, profiles: [] }
-  ],
+
+  // getAssignDesc(id) {
+  // const assign = appStore.data.pssigns.find(h => h.id == id)
+  //   const profiles = appStore.getProfileName
+  //assign.date + '-' + assign.hour + '@' + assign.local + ': ' + assign.profiles
+  // },
   addAssign(assign) {
-    assign.id = appStore.countAssigns++
+    assign.id = appStore.data.countAssigns++
     assign.date = assign.date || '2020-02-21'
     assign.local = assign.local || 0
     assign.hour = assign.hour || 0
     assign.profiles = assign.profiles || []
-    appStore.assigns.push(assign)
+    appStore.data.assigns.push(assign)
   },
   deleteAssign(assign) {
     // TODO: delete all references in appStore before deleting!
-    const idx = appStore.assigns.indexOf(assign)
-    appStore.assigns.splice(idx, 1)
+    const idx = appStore.data.assigns.indexOf(assign)
+    appStore.data.assigns.splice(idx, 1)
   },
 })
 

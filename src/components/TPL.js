@@ -13,24 +13,28 @@ import appStore from '../store/appStore'
 export default view(() => {
   return (
     <div className='container'>
+      <div>
+        <button onClick={appStore.saveStore}>Save</button>
+        <button onClick={appStore.restoreStore}>Restore</button>
+      </div>
       <h1>Hours</h1>
       <HourCreator />
-      {appStore.hours.map(hour => (
+      {appStore.data.hours.map(hour => (
         <Hour hour={hour} key={hour.id} />
       ))}
       <h1>Locals</h1>
       <LocalCreator />
-      {appStore.locals.map(local => (
+      {appStore.data.locals.map(local => (
         <Local local={local} key={local.id} />
       ))}
       <h1>Profiles</h1>
       <ProfileCreator />
-      {appStore.profiles.map(profile => (
+      {appStore.data.profiles.map(profile => (
         <Profile profile={profile} key={profile.id} />
       ))}
       <h1>Assigns</h1>
       <AssignCreator />
-      {appStore.assigns.map(assign => (
+      {appStore.data.assigns.map(assign => (
         <Assign assign={assign} key={assign.id} />
       ))}
     </div>

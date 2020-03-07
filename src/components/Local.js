@@ -71,7 +71,7 @@ class Local extends Component {
           onChange={this.onHoursChange}
           multiple
           >
-          {appStore.hours.map(hour => (
+          {appStore.data.hours.map(hour => (
             <option key={hour.id} value={hour.id}>
               { appStore.getHourDesc(hour.id) }
             </option>

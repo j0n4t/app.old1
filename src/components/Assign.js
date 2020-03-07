@@ -72,7 +72,7 @@ class Assign extends Component {
           value={currentAssign.local}
           onChange={onChange}
           >  
-          {appStore.locals.map(local => (
+          {appStore.data.locals.map(local => (
             <option key={local.id} value={local.id}>
               {local.name}
             </option>
@@ -96,7 +96,7 @@ class Assign extends Component {
           multiple
           >
           {/* TODO: filter profiles list, limit by 2, etc */}
-          {appStore.profiles.map(profile => (
+          {appStore.data.profiles.map(profile => (
             <option key={profile.id} value={profile.id}>
               {profile.name}
             </option>
