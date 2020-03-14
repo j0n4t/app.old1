@@ -7,7 +7,27 @@ const appStore = store({
   saveStore() {
     localStorage.setItem('data', JSON.stringify(appStore.data))
   },
-  
+  saveFile() {
+    var data = JSON.stringify(appStore.data)
+    var blob = new Blob([data], {type:'application/json'})
+    var elem = window.document.createElement('a')
+    elem.href = window.URL.createObjectURL(blob)
+    console.log(elem.href)
+    elem.download = 'store.json'
+    document.body.appendChild(elem)
+    elem.click()
+    document.body.removeChild(elem)
+  },
+  loadFile() {
+    var selectedFile = document.getElementById('load').files[0]
+    const fr = new FileReader()
+    fr.onload = (e) => {
+      var result = JSON.parse(e.target.result)
+      appStore.data = result
+    }
+    fr.readAsText(selectedFile)
+  },
+
   data: {
     weekdays: ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'],
     countHours: 1,
@@ -27,7 +47,7 @@ const appStore = store({
       {id: 0, date:'2020-02-21', local: 0, hour: 0, profiles: [] }
     ],
   },
-  
+
   // HOURS
   getHourDesc(id) {
     const hour = appStore.data.hours.find(h => h.id == id)

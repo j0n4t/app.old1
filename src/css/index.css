@@ -6,11 +6,22 @@ section {
   margin: 0 auto;
 }
 
-button, input, select:not([multiple]) {
+button, input, label, select:not([multiple]) {
+  padding: .2em;
   height: 1.7em;
+  background-color: #F0F0F0;
+  border: 1px ridge black;
   width: fit-content;
   margin: 1px;
   box-sizing: border-box;
+  
+}
+label {
+  padding: .25em .2em;
+}
+
+input[type='file'] {
+  display: none;
 }
 
 .container {
